@@ -1,6 +1,3 @@
 {
-	"databaseServer" : "localhost",
-	"database" : "",
-	"dbUsername" : "",
-	"dbPassword" : ""
+	"connectionString" : "<get from mongodb>"
 }
