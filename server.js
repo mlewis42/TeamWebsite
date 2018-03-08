@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://" + config.databaseServer + ":27017/" + config.database);
+mongoose.connect(config.connectionString);
 var db = mongoose.connection;
 
 //Bind connection to error event (to get notification of connection errors)
