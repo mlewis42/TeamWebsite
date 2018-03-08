@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Chesapeake Angels</title>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src="script.js"></script>
+	</head>
+	<body style="background-color: #FF2222; border-color: #CC1111">
+	<div>
+  <% if (message && message != "") { %>
+     <%= message %>
+	<% } %>
+  </div>
+		<div>
+			<div>
+			<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
+				  <% include ./partials/navigationBar %>
+			</nav>
+			</div>
+			<br/>
+			<div class="jumbotron"> <p>
+			Congrats Joe! 2017 League MVP.
+			</p></div>
+		</div>
+	</body>
+</html>

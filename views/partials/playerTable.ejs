@@ -1,0 +1,30 @@
+<div>
+<script type="text/javascript" src="/scripts/TableWizard.js"></script>
+<div style="padding-left: 30px; padding-bottom: 10px;">
+</div>
+<table class="table table-striped" id="sortableTable">
+  <thead>
+    <tr>
+	  <th scope="col" style="cursor: pointer;" onclick="sortTableNumeric(1)">Number</th>
+      <th scope="col" style="cursor: pointer;" onclick="sortTableAlpha(2)">First</th>
+      <th scope="col" style="cursor: pointer;" onclick="sortTableAlpha(3)">Last</th>
+      <th scope="col" style="cursor: pointer;" onclick="sortTablePosition(4)">Position</th>
+	  <th scope="col">View Stats (Coming soon?)</th>
+    </tr>
+  </thead>
+  <tbody>
+<% if(results){ %>
+	<% for(var i=0; i<results.length; i++) { %>
+		 <tr>
+			<td><%= results[i].number %></td>
+			<td><%= results[i].firstname %></td>
+			<td><%= results[i].lastname %></td>
+			<td><%= results[i].position %></td>	
+			<td></td>
+		 </tr>
+	<% } %>
+<% } %>
+	</tbody>
+</table>
+
+</div>

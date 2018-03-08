@@ -1,0 +1,34 @@
+<div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>		
+      <th scope="col">Number</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Position</th>
+	  <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+<% if(results){ %>
+	<% for(var i=0; i<results.length; i++) { %>
+		 <tr>			
+			<td><%= results[i].number %></td>
+			<td><%= results[i].firstname %></td>
+			<td><%= results[i].lastname %></td>
+			<td><%= results[i].position %></td>
+			<td scope="row">
+				<form style="padding-left: 40px; width: 300px;" action="/management/restoreplayer" method="post">
+					<input type="hidden" name="id" value="<%= results[i].id %>">
+					<button type="submit" class="btn btn-primary">RESTORE</button>
+				</form>
+			</td>
+		 </tr>
+	<% } %>
+<% } %>
+	</tbody>
+</table>
+
+
+</div>

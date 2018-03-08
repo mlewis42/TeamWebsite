@@ -1,0 +1,36 @@
+<html>
+<head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<title>Chesapeake Angels</title>
+</head>
+<body style="background-color: #FF2222; border-color: #CC1111">
+<div>
+   <% if (message && message != "") { %>
+     <% include ./partials/messageDisplay %>
+	<% } %>
+  </div>
+  <div>
+  <div>
+  <nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
+       <% include ./partials/navigationBar %>
+</nav>
+</div>
+  <br/>
+  <div class="jumbotron">
+    <% if (current=="/schedule/viewcalendar") { %>
+     <%  include ./partials/viewCalendar %>
+	 <% } else if (current=="/schedule/viewusercalendar") { %>
+     <%  include ./partials/viewUserCalendar %>
+	 <% } else if (current=="/schedule/viewevent") { %>
+		<% if(results.type =="Game" || results.type =="Scrimmage") {%>
+			<%  include ./partials/viewEventGameForm %>
+		<% } else if (results.type =="Team Function" || results.type =="Practice") { %>
+			<%  include ./partials/viewEventTeamFunctionForm %>
+		<% } %>
+	<% } %>
+</div>
+  </div>
+</body>
+</html>

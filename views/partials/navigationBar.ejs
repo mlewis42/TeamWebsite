@@ -1,0 +1,46 @@
+<ul class="nav navbar-nav">
+
+<% if (current=="/") { %>
+	<li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
+<% } else { %>
+   <li><a href="/">Home</a></li>
+<% } %>
+
+<% if (current=="/team") { %>
+	<li class="active"><a href="/team">Team<span class="sr-only">(current)</span></a></li>
+<% } else { %>
+   <li><a href="/team">Team</a></li>
+<% } %>
+
+<% if (current=="/schedule/viewcalendar" || current=="/schedule/viewusercalendar") { %>
+	<li class="active"><a href="/schedule">Schedule<span class="sr-only">(current)</span></a></li>
+<% } else { %>
+   <li><a href="/schedule">Schedule</a></li>
+<% } %>
+
+<% if (current=="/contact") { %>
+	<li class="active"><a href="/contact">Contact us<span class="sr-only">(current)</span></a></li>
+<% } else { %>
+   <li><a href="/contact">Contact us</a></li>
+<% } %>
+  
+</ul>
+<ul class="nav navbar-nav" style="float:right;">
+<% if (admin) { %>
+	<% if (current=="/management") { %>
+		<li class="active"><a href="/management">Team Management<span class="sr-only">Team Management</span></a></li>
+	<% } else { %>
+	   <li><a href="/management">Team Management</a></li>
+	<% } %>
+<% } %>
+<%if (current=="/login" || current=="/dashboard") { %>
+	<li class="active"><a href="/login"><%= accountButtonName%><span class="sr-only">(current)</span></a></li>
+<% } else { %>
+   <li><a href="/login"><%= accountButtonName%></a></li>
+<% } %>
+<% if(accountButtonName != "Login") { %>
+	<li><a href="/logout">Logout</a></li>
+<% } %>
+</ul>
+
+

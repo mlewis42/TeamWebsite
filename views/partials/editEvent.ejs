@@ -1,0 +1,43 @@
+<div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<form style="padding-left: 40px; width: 500px;" action="/management/editevent" method="post">
+	<input type="hidden" name="id" value="<%= results.id %>">
+  <div class="form-group row">
+    <label for="inputName" class="col-2 col-form-label">Event Name</label>
+	<div class="col-10" style="width: 200px;">
+		<input type="text" class="form-control" id="inputName" name="eventname" placeholder="Event Name" value="<%= results.name %>">
+	</div>
+  </div>
+  <div class="form-group row">
+  <label class="col-2 col-form-label">Date & Time</label>
+    <div type='text' style="padding-bottom: 10px;"><%= results.eventdate %></div>
+	</div>
+  <div class="form-group row">
+	  <label for="eventType">Event Type</label>
+	  <select class="form-control" id="eventType" name="eventtype" style="width: 200px;">
+		<option <%if (results.type=="Game"){ %> selected <% } %>>Game</option>
+		<option <%if (results.type=="Practice"){ %> selected <% } %>>Practice</option>
+		<option <%if (results.type=="Scrimmage"){ %> selected <% } %>>Scrimmage</option>
+		<option <%if (results.type=="Team Function"){ %> selected <% } %>>Team Function</option>
+	  </select>
+  </div>
+  
+  <div class="form-group row">
+	  <label for="locationLink">Location</label>
+	  <select class="form-control" id="locationLink" name="locationlink" style="width: 200px;">
+		<option name=""; value=""; <%if (results.location==null){ %> selected <% } %>></option>
+		<% for(var i=0; i<filler.locationChoices.length; i++) { %>
+			<option value="<%= filler.locationChoices[i].id%>" <%if (results.location.name != null && filler.locationChoices[i].name==results.location.name){ %> selected <% } %>><%= filler.locationChoices[i].name%></option>
+		<% } %>
+	  </select>
+  </div> 
+  
+  <div class="checkbox row">
+	  <label><input type="checkbox" value="true" name="cancelled" <% if (results.cancelled) { %>checked <% } %>>Cancelled</label>
+	</div>
+	
+   <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
