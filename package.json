@@ -1,0 +1,37 @@
+{
+  "name": "bbteamsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install": "npm install --save express",
+	"install": "npm install ejs --save",
+	"install": "npm install request",
+	"install": "npm install touch-cli -g",
+	"install": "npm install mongoose --save",
+	"install": "npm install express-session",
+	"install": "npm install cookie-parser",
+	"install": "npm install bcrypt",
+	"install": "npm install pem"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "bootstrap-confirm-delete": "^2.1.2",
+    "client-sessions": "^0.8.0",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-mysql-session": "^1.2.3",
+    "express-session": "^1.15.6",
+    "knex": "^0.14.2",
+    "mongoose": "^5.0.6",
+    "mysql": "^2.15.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pem": "^1.12.3",
+    "request": "^2.83.0"
+  }
+}
