@@ -6,9 +6,6 @@
 <title>Chesapeake Angels</title>
 </head>
 <body style="background-color: #FF2222; border-color: #CC1111">
-   <% if (message && message != "") { %>
-     <% include ./partials/messageDisplay %>
-	<% } %>
   <div>
   <div>
   <nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
@@ -68,6 +65,9 @@
   </div>
 </nav> 
 </div>
+   <% if (message && message != "") { %>
+     <% include ./partials/messageDisplay %>
+	<% } %>
   <br/>
   </div>
   <div class="jumbotron">

@@ -1,5 +1,6 @@
 <div style="display: inline;">
-<form style="padding-left: 40px; width: 300px; position: relative;" action="/management/editplayer" method="post">
+<div style="display: inline-block; vertical-align: top">
+<form style="padding-left: 40px; width: 300px;" action="/management/editplayer" method="post">
 	<input type="hidden" name="id" value="<%= results.id %>">
   <div class="form-group row">
     <label for="inputFirstName" class="col-2 col-form-label">First Name</label>
@@ -42,8 +43,11 @@
 	
    <button type="submit" class="btn btn-primary">Save</button>
 </form>
-<form style="float: right; position: relative; padding-right: 30px;" action="/management/deleteplayer" method="post">
+</div>
+<div style="display: inline-block; vertical-align: top; float: right;">
+<form style="float: right; padding-right: 30px; vertical-align: top" action="/management/deleteplayer" method="post">
 	<input type="hidden" name="id" value="<%= results.id %>">
 	<button type="submit" class="btn btn-primary">Delete</button>
 </form>
+</div>
 </div>

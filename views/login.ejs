@@ -10,17 +10,17 @@
 		<script src="script.js"></script>
 	</head>
 	<body style="background-color: #FF2222; border-color: #CC1111">
-	<div>
-  <% if (message && message != "") { %>
-     <% include ./partials/messageDisplay %>
-	<% } %>
-  </div>
 		<div>
 			<div>
 			<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
 				  <% include ./partials/navigationBar %>
 			</nav>
 			</div>
+				<div>
+			  <% if (message && message != "") { %>
+				 <% include ./partials/messageDisplay %>
+				<% } %>
+			  </div>
 			<br/>
 			<div class="jumbotron"> <p>
 			

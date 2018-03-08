@@ -16,6 +16,8 @@ module.exports = function(app)
 			//not logged in, display basic team game and scrimmage schedule
 			
 			mongoose.model('Event').find({eventdate: {$gte: currdate}, type: {$in: ['Game', 'Scrimmage']} }, null, {sort: {'eventdate': 1}}, function(err, events) {
+				if(events != null)
+				{
 					var eventMap = [];
 
 					events.forEach(function(event) {
@@ -32,10 +34,11 @@ module.exports = function(app)
 					results.events = eventMap;
 					req.route.path = '/schedule/viewcalendar';
 					res.render('schedule', globals.PropertyList(req, "", results));
-				  });
-			  
+				}
+			});
+				
 	
-		  } else {
+		} else {
 			//logged in, display all events and schedule interaction
 			
 			mongoose.model('Event').find({eventdate: {$gte: currdate}}, null, {sort: {'eventdate': 1}}, function(err, events) {
@@ -56,7 +59,7 @@ module.exports = function(app)
 				req.route.path = '/schedule/viewusercalendar';
 				res.render('schedule', globals.PropertyList(req, "", results));
 			  });
-		  }
+		}
 	});
 	
 	app.get('/schedule/viewevent', globals.RequireLogin, function(req, res) {

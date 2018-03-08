@@ -1,4 +1,5 @@
 <div>
+<div style="display: inline-block; vertical-align: top">
 <form style="padding-left: 40px; width: 300px;" action="/management/edituser" method="post">
   <div class="form-group row">
     <label class="col-2 col-form-label" style="font-size: 25px;"><%= results.email %></label>
@@ -66,8 +67,11 @@
 	
    <button type="submit" class="btn btn-primary">Save</button>
 </form>
+</div>
+<div style="display: inline-block; vertical-align: top; float: right;">
 <form style="float: right; position: relative; padding-right: 30px;" action="/management/deleteaccount" method="post">
 	<input type="hidden" name="id" value="<%= results.id %>">
 	<button type="submit" class="btn btn-primary">Delete</button>
 </form>
+</div>
 </div>

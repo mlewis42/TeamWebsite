@@ -37,7 +37,7 @@ module.exports = function(app)
 				}
 				
 			}else{
-				res.render('management', globals.PropertyList(req, 'Account created successfully'));
+				res.redirect('/management/viewaccounts');
 			}
 		});
 	});
@@ -176,7 +176,7 @@ module.exports = function(app)
 				}
 				
 			}else{
-				res.render('management', globals.PropertyList(req, 'Player created successfully'));
+				res.redirect('/management/viewplayers');
 			}
 		});
 	});
@@ -365,7 +365,7 @@ module.exports = function(app)
 						res.render('management', globals.PropertyList(req, err));
 						
 					}else{
-						res.render('management', globals.PropertyList(req, 'Event created'));
+						res.redirect('/management/updateteamschedule');
 					}
 				});
 			});
@@ -394,7 +394,7 @@ module.exports = function(app)
 					res.render('management', globals.PropertyList(req, err));
 					
 				}else{
-					res.render('management', globals.PropertyList(req, 'Location created'));
+					res.redirect('/management/editeventlocations');
 				}
 			});
 	});
