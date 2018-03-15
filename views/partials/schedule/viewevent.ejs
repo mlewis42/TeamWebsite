@@ -1,0 +1,5 @@
+<% if(results.type =="Game" || results.type =="Scrimmage") {%>
+	<%  include ./vieweventgameform %>
+<% } else if (results.type =="Team Function" || results.type =="Practice") { %>
+	<%  include ./vieweventteamfunctionform %>
+<% } %>

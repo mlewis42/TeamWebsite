@@ -13,23 +13,18 @@
   </div>
   <div>
   <div>
-  <nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
-       <% include ./partials/navigationBar %>
-</nav>
+<div>
+				<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px; margin-bottom: 0!important;">
+					  <% include ./partials/navigationBar %>
+				</nav>
+				<% include ./partials/seasonbanner %>
+			</div>
 </div>
   <br/>
   <div class="jumbotron">
-    <% if (current=="/schedule/viewcalendar") { %>
-     <%  include ./partials/viewCalendar %>
-	 <% } else if (current=="/schedule/viewusercalendar") { %>
-     <%  include ./partials/viewUserCalendar %>
-	 <% } else if (current=="/schedule/viewevent") { %>
-		<% if(results.type =="Game" || results.type =="Scrimmage") {%>
-			<%  include ./partials/viewEventGameForm %>
-		<% } else if (results.type =="Team Function" || results.type =="Practice") { %>
-			<%  include ./partials/viewEventTeamFunctionForm %>
-		<% } %>
-	<% } %>
+    <% if (filler != null && filler.partials != null && filler.partials.mainform !=null) { %>
+	<%- include(filler.partials.mainform) %>
+  <% } %>
 </div>
   </div>
 </body>

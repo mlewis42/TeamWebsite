@@ -107,6 +107,7 @@ module.exports = function(app)
 					admin: user.admin
 			  });
 			});
+			
 			res.render('management', globals.PropertyList(req, err, userMap)); 
 		  });
 		 
@@ -157,6 +158,10 @@ module.exports = function(app)
 	});
 	
 	app.post('/management/createplayer', globals.RequireAdmin, (req, res) => {
+		
+		if(req.body.number == "0")
+			req.body.number = "00";
+		
 		var newUser = mongoose.model('Player')({
 			firstname : req.body.firstname,
 			lastname : req.body.lastname,
@@ -213,12 +218,16 @@ module.exports = function(app)
 	});
 	
 	app.get('/management/editplayer', globals.RequireAdmin, function(req, res) {
+		
 		mongoose.model('Player').findOne({ _id: req.query.id }, function(err, player) {
 				res.render('management', globals.PropertyList(req, err, player));  
 			});    
 	});
 	
 	app.post('/management/editplayer', globals.RequireAdmin, (req, res) => {
+		
+		if(req.body.number == "0")
+			req.body.number = "00";
 		
 		mongoose.model('Player').update({ _id: req.body.id }, {firstname: req.body.firstname, lastname: req.body.lastname, number: req.body.number, position: req.body.position, active: req.body.active === "true"}, function(err, raw){
 			if (err) {
@@ -440,6 +449,79 @@ module.exports = function(app)
 			  res.render('management', globals.PropertyList(req));
 			}
 			res.redirect('/management/editeventlocations');
+		});	
+	});
+	
+	//***SEASONS****///
+	
+	app.get('/management/createseason', globals.RequireAdmin, function(req, res) {
+		res.render('../views/management', globals.PropertyList(req));  
+	});
+	
+	app.post('/management/createseason', globals.RequireAdmin, (req, res) => {
+			var newSeason = mongoose.model('Season')({
+				name : req.body.seasonname,
+				timestamp : new Date(),
+				standing: "1rst place",
+				record : { wins : 0, losses : 0 }				
+			});
+			
+			req.route.path = '/management/createseason';
+			newSeason.save(function(err) {
+				if(err)
+				{
+					res.render('management', globals.PropertyList(req, err));
+					
+				}else{
+					res.redirect('/management/editseasons');
+				}
+			});
+	});
+	
+	app.get('/management/editseasons', globals.RequireAdmin, function(req, res) {
+		
+		mongoose.model('Season').find({datedeleted : null}, null, {sort: {'timestamp': 1}}, function(err, seasons) {
+			var seasonMap = [];
+
+			seasons.forEach(function(season) {
+			  seasonMap.push({
+					id: season._id,
+					name: season.name,
+					standing: season.standing,
+					record: season.record
+			  });
+			});
+			res.render('management', globals.PropertyList(req, err, seasonMap)); 
+		  });
+		 
+	});
+	
+	app.get('/management/editseason', globals.RequireAdmin, function(req, res) {
+		mongoose.model('Season').findOne({ _id: req.query.id, datedeleted: null }, function(err, season) {
+				res.render('management', globals.PropertyList(req, err, season));  
+			});    
+	});
+		
+	app.post('/management/editseason', globals.RequireAdmin, (req, res) => {
+		mongoose.model('Season').update({ _id: req.body.id }, {name: req.body.name, standing: req.body.standing, record: { wins: req.body.wins, losses: req.body.losses}}, function(err, raw){
+			if (err) {
+			  res.render('management', globals.PropertyList(req));
+			}
+			else{
+				res.redirect('/management/editseasons');
+			}
+		});	
+	});
+	
+	app.post('/management/deleteseason', globals.RequireAdmin, (req, res) => {
+		var datetime = new Date();
+		mongoose.model('Season').update({ _id: req.body.id }, {datedeleted: datetime}, function(err, raw){
+			if (err) {
+			  res.render('management', globals.PropertyList(req));
+			}
+			else{
+				res.redirect('/management/editseasons');
+			}
 		});	
 	});
 }

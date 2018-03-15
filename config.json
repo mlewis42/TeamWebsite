@@ -1,3 +1,4 @@
 {
-	"connectionString" : "<get from mongodb>"
+	"connectionString" : "mongodb://localhost:27017/baseball",
+	"port" : "9999"
 }

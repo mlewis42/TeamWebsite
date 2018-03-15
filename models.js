@@ -19,7 +19,7 @@ var playerSchema = new Schema({
         firstname : String,
         lastname : String,
 		active :	Boolean,
-		number : Number,
+		number : String,
 		position : String,
 		datedeleted : Date
     });
@@ -30,6 +30,26 @@ var eventLocationSchema = new Schema({
 		address : String
     });
 var EventLocation = mongoose.model('EventLocation', eventLocationSchema);
+
+var seasonSchema = new Schema({
+        name : String,
+		timestamp : Date,
+		datedeleted : Date,
+		standing: String,
+		record : {
+					wins : Number,
+					losses : Number
+				}
+    });
+var Season = mongoose.model('Season', seasonSchema);
+
+var newsItemSchema = new Schema({
+        title : String,
+		body : String,
+		datedeleted : Date,
+		timestamp : Date
+    });
+var NewsItem = mongoose.model('NewsItem', seasonSchema);
 
 var eventSchema = new Schema({
         name : String,

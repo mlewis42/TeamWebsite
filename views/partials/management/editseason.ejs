@@ -1,0 +1,43 @@
+<div>
+<div style="display: inline-block; vertical-align: top">
+<form style="padding-left: 40px; width: 300px;" action="/management/editseason" method="post">
+  <div class="form-group row">
+	<input  type="hidden" name="id" value="<%= results.id %>">
+  </div>
+  <div class="form-group row">
+    <label for="seasonname" class="col-2 col-form-label">Name / Year</label>
+	<div class="col-10">
+		<input type="text" class="form-control" id="seasonname"  name="name" placeholder="Season Name" value="<%= results.name %>">
+	</div>
+  </div>
+  <div class="form-group row">
+    <label for="standing" class="col-2 col-form-label">Standing</label>
+	<div class="col-10">
+		<input type="text" class="form-control" id="standing"  name="standing" placeholder="Standing" value="<%= results.standing %>">
+	</div>
+  </div>
+  
+  <div class="form-group row">
+	  <label for="wins" class="col-2 col-form-label">Wins</label>
+	  <div class="col-10">
+		<input class="form-control" type="number" value="<%= results.record.wins %>" name="wins"  id="wins" style="width: 70px;">
+	  </div>
+  </div>
+  
+  <div class="form-group row">
+	  <label for="losses" class="col-2 col-form-label">Losses</label>
+	  <div class="col-10">
+		<input class="form-control" type="losses" value="<%= results.record.losses %>" name="losses"  id="losses" style="width: 70px;">
+	  </div>
+  </div>
+	
+   <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+<div style="display: inline-block; vertical-align: top; float: right;">
+<form style="float: right; position: relative; padding-right: 30px;" action="/management/deleteseason" method="post">
+	<input type="hidden" name="id" value="<%= results.id %>">
+	<button type="submit" class="btn btn-primary">Delete</button>
+</form>
+</div>
+</div>

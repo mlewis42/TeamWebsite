@@ -1,0 +1,19 @@
+<div>
+	<div style="padding-left: 20px;">
+		<p>
+			*Creating a season will make it the current season by default.
+		</p>
+	</div>
+	<div>
+		<form style="padding-left: 40px; width: 500px;" action="/management/createseason" method="post">
+			<div class="form-group row">
+				<label for="inputName" class="col-2 col-form-label">Season Name / Year</label>
+				<div class="col-10" style="width: 200px;">
+					<input type="text" class="form-control" id="inputName" name="seasonname" placeholder="Season Name">
+				</div>
+			</div>
+			
+			<button type="submit" class="btn btn-primary row">Create Season</button>
+		</form>
+	</div>
+</div>

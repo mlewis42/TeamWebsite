@@ -40,8 +40,64 @@ app.use(session({
     saveUninitialized: true
 }))
 
+//middleware that checks and validates every user request
+app.use(function(req, res, next) {
+  if (req.session && req.session.user) {
+    mongoose.model('User').findOne({ email: req.session.user.email, datedeleted : null }, function(err, user) {
+      if (user) {
+        req.user = user;
+        delete req.user.password; // delete the password from the session
+        req.session.user = user;  //refresh the session value
+		delete req.session.user.password;
+        res.locals.user = user;
+		
+      }
+      // finishing processing the middleware and run the route
+      next();
+    });
+  } else {
+    next();
+  }
+});
 
-
+app.use(function(req, res, next) {
+	//get banner data
+	//get the current season
+	mongoose.model('Season').findOne({}, {}, { sort: { 'timestamp' : -1 } }, function(err, season) {
+		var seasonbanner = {};
+		if(season != null){
+			
+		  seasonbanner.seasonname = season.name;
+		  seasonbanner.seasonstanding = season.standing;
+		  seasonbanner.seasonrecord = season.record;
+		}
+		
+		var currdate = new Date();
+		//get next game
+		mongoose.model('Event').findOne({eventdate: {$gte: currdate}, type: {$in: ['Game', 'Scrimmage']}}, {}, { sort: { 'eventdate' : 1 } }, function(err, event) {
+			if(event != null){
+				var dateFormat = "";
+				if(event.eventdate != null && event.eventdate != ""){
+					var d = new Date(event.eventdate);
+					var month = d.getMonth() + 1;
+					var day = d.getDate();
+					
+					dateFormat = month + "/" + day;
+				}
+				
+				seasonbanner.nextgamename = dateFormat + " " + event.name;
+				
+				if(event.type == "Scrimmage"){
+					seasonbanner.nextgamename += " (scrimmage)";
+				}
+				
+				req.session.seasonbanner = seasonbanner;
+			}
+			next();
+		});
+	});
+	
+});
 
 app.get('/', function (req, res) {
   res.render('index', globals.PropertyList(req, ''));
@@ -120,26 +176,6 @@ router.get("/contact",function(req,res){
   res.render('contact', globals.PropertyList(req));
 });
 
-//middleware that checks and validates every user request
-app.use(function(req, res, next) {
-  if (req.session && req.session.user) {
-    mongoose.model('User').findOne({ email: req.session.user.email }, function(err, user) {
-      if (user) {
-        req.user = user;
-        delete req.user.password; // delete the password from the session
-        req.session.user = user;  //refresh the session value
-		delete req.session.user.password;
-        res.locals.user = user;
-		
-      }
-      // finishing processing the middleware and run the route
-      next();
-    });
-  } else {
-    next();
-  }
-});
-
 var management = require('./routes/team')(app);
 var management = require('./routes/schedule')(app);
 var management = require('./routes/management')(app);
@@ -164,6 +200,6 @@ pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
     res.end('o hai!')
   }).listen(443)
 })*/
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(config.port, function () {
+  console.log('App started and listening on port 3000')
 })

@@ -23,6 +23,16 @@ exports.RequireAdmin = function (req, res, next){
 };
 
 exports.PropertyList = function (req, mess, queryResults, fill){
+	
+	if(fill == null)
+		fill = {};
+	
+	if(fill.partials == null)
+		fill.partials = {};
+		
+	fill.partials.mainform = "./partials" + req.route.path;
+	fill.seasonbanner = req.session.seasonbanner;
+	
 	var pl = {
 		message: mess,
 		current: req.route.path,

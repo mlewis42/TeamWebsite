@@ -1,0 +1,48 @@
+<div style="display: inline">
+	<div style="display: inline-block; vertical-align: top">
+		<div>
+			<p style="position: relative; padding-left: 30px; font-size: 40px;"><%= results.name %></p>
+		</div>
+		<div style="display: inline-block;">
+			<form style="float: left; padding-left: 30px;" action="/schedule/replyevent" method="post">
+				<input type="hidden" name="id" value="<%= results.id %>">
+				<input type="hidden" name="reply" value="attending">
+				<button type="submit" class="btn btn-primary">Attending</button>
+			</form>
+			<form style="float: left; padding-left: 30px;" action="/schedule/replyevent" method="post">
+				<input type="hidden" name="id" value="<%= results.id %>">
+				<input type="hidden" name="reply" value="absent">
+				<button type="submit" class="btn btn-primary">Declined</button>
+			</form>
+		</div>
+		
+		<div>
+			<p style="padding-left: 30px;"><%= results.type %></p>
+			<p style="padding-left: 30px;"><%= results.eventdate %></p>
+			<p style="padding-left: 30px;"><%= results.location.name %></p>
+			<p style="padding-left: 30px;"><%= results.location.address %></p>
+		</div>
+	</div>
+	<div style="display: inline-block; vertical-align: top">
+		<div style="padding-right: 30px; float: left;">
+			<table class="table table">
+			  <thead>
+				<tr>
+					<th scope="col" style="padding-right: 70px;">Attending</th>
+					<th scope="col" style="padding-right: 70px;">Declined</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<% for(var i=0; 
+					(results.absent != null && i<results.absent.length) || 
+					(results.attending != null && i<results.attending.length); i++) { %>
+					 <tr>
+						<td><%= results.attending != null && results.attending.length > i ? results.attending[i].firstname + ' ' + results.attending[i].lastname : '' %></td>
+						<td><%= results.absent != null && results.absent.length > i ? results.absent[i].firstname + ' ' + results.absent[i].lastname : '' %></td>
+					 </tr>
+				<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

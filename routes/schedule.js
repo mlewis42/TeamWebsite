@@ -109,7 +109,7 @@ module.exports = function(app)
 	app.post('/schedule/replyevent', globals.RequireLogin, (req, res) => {
 
 		//get player
-		mongoose.model('Player').findOne({ "datedeleted" : null, _id : req.session.user.playerid }, function(err, player) {	
+		mongoose.model('Player').findOne({ "datedeleted" : null, _id : req.session.user.playerid, active: true }, function(err, player) {	
 		
 			var set = {};
 			

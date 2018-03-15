@@ -12,9 +12,12 @@
 	<body style="background-color: #FF2222; border-color: #CC1111">
 		<div>
 			<div>
-			<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
-				  <% include ./partials/navigationBar %>
-			</nav>
+			<div>
+				<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px; margin-bottom: 0!important;">
+					  <% include ./partials/navigationBar %>
+				</nav>
+				<% include ./partials/seasonbanner %>
+			</div>
 			</div>
 				<div>
 			  <% if (message && message != "") { %>

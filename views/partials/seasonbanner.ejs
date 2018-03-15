@@ -1,0 +1,33 @@
+<div style="background-color: #B03030; width: 80%; height:40px; right: -20px; float: right; transform: skewX(40deg); position: relative; padding-top: 5px; padding-left: 15px;">
+	<div style="transform: skewX(-40deg);">
+		<div style="display: inline-block;">
+			<div style="display: inline-block; padding-right: 15px;">
+				<p style="color: white; font-size:20px; display: inline;">
+					<%if(filler != null && filler.seasonbanner != null){ %>
+						<%= filler.seasonbanner.seasonname %>
+					<% } %>
+				</p>
+			</div>
+			<div style="display: inline-block;">
+				<p style="color: white; font-size:12px; display: block; margin-bottom: 0px;">
+					<%if(filler != null && filler.seasonbanner != null){ %>
+						<%= filler.seasonbanner.seasonstanding %>
+					<% } %>
+				</p>
+				<p style="color: white; font-size:12px; display: block;">
+					<%if(filler != null && filler.seasonbanner != null && filler.seasonbanner.seasonrecord != null){ %>
+						<%= "Record: " + filler.seasonbanner.seasonrecord.wins + " - " + filler.seasonbanner.seasonrecord.losses %>
+					<% } %>
+				</p>
+			</div>
+			
+		</div>
+		<div style="display: inline-block; float: right; margin-top: 10px; margin-right: 30px;">
+				<p style="color: white; font-size:15px; display: inline; float: right;">
+					<%if(filler != null && filler.seasonbanner != null){ %>
+						<%= filler.seasonbanner.nextgamename %>
+					<% } %>
+				</p>
+		</div>
+	</div>
+</div>

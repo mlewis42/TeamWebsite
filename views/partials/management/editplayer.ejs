@@ -1,0 +1,53 @@
+<div style="display: inline;">
+<div style="display: inline-block; vertical-align: top">
+<form style="padding-left: 40px; width: 300px;" action="/management/editplayer" method="post">
+	<input type="hidden" name="id" value="<%= results.id %>">
+  <div class="form-group row">
+    <label for="inputFirstName" class="col-2 col-form-label">First Name</label>
+	<div class="col-10">
+		<input type="text" class="form-control" id="inputFirstName"  name="firstname" placeholder="First Name" value="<%= results.firstname %>">
+	</div>
+  </div>
+  <div class="form-group row">
+    <label for="inputLastName" class="col-2 col-form-label">Last Name</label>
+	<div class="col-10">
+		<input type="text" class="form-control" id="inputLastName"  name="lastname" placeholder="Last Name" value="<%= results.lastname %>">
+	</div>
+  </div>
+  <div class="form-group row">
+	  <label for="inputNumber" class="col-2 col-form-label">Number</label>
+	  <div class="col-10">
+		<input class="form-control" type="number" value="<%= results.number %>" name="number"  id="inputNumber" style="width: 70px;">
+	  </div>
+  </div>
+  <div class="form-group row">
+	  <label for="position">Primary Position:</label>
+	  <select class="form-control" id="position" name="position" style="width: 70px;">
+		<option <%if (results.position=="P"){ %> selected <% } %>>P</option>
+		<option <%if (results.position=="C"){ %> selected <% } %>>C</option>
+		<option <%if (results.position=="1B"){ %> selected <% } %>>1B</option>
+		<option <%if (results.position=="2B"){ %> selected <% } %>>2B</option>
+		<option <%if (results.position=="3B"){ %> selected <% } %>>3B</option>
+		<option <%if (results.position=="SS"){ %> selected <% } %>>SS</option>
+		<option <%if (results.position=="LF"){ %> selected <% } %>>LF</option>
+		<option <%if (results.position=="CF"){ %> selected <% } %>>CF</option>
+		<option <%if (results.position=="RF"){ %> selected <% } %>>RF</option>
+		<option <%if (results.position=="IF"){ %> selected <% } %>>IF</option>
+		<option <%if (results.position=="OF"){ %> selected <% } %>>OF</option>
+		<option <%if (results.position=="UT"){ %> selected <% } %>>UT</option>
+	  </select>
+  </div> 
+  <div class="checkbox row">
+	  <label><input type="checkbox" value="true" name="active" <% if (results.active) { %>checked <% } %>>Active</label>
+	</div>
+	
+   <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+<div style="display: inline-block; vertical-align: top; float: right;">
+<form style="float: right; padding-right: 30px; vertical-align: top" action="/management/deleteplayer" method="post">
+	<input type="hidden" name="id" value="<%= results.id %>">
+	<button type="submit" class="btn btn-primary">Delete</button>
+</form>
+</div>
+</div>
