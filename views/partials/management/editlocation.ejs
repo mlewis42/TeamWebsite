@@ -1,10 +1,11 @@
-<div style="display: inline;">
-<form style="padding-left: 40px; width: 300px; position: relative;" action="/management/editlocation" method="post">
+<link rel="stylesheet" type="text/css" href="/styles/editform.css" />
+<div>
+<form class="editForm" action="/management/editlocation" method="post">
 	<input type="hidden" name="id" value="<%= results.id %>">
   
   <div class="form-group row">
     <label for="inputName" class="col-2 col-form-label">Location Name</label>
-	<div class="col-10" style="width: 200px;">
+	<div class="col-10 editInput">
 		<input type="text" class="form-control" id="inputName" name="locationname" placeholder="Location Name" value="<%= results.name %>">
 	</div>
   </div>
@@ -16,8 +17,10 @@
 	
    <button type="submit" class="btn btn-primary">Save</button>
 </form>
-<form style="float: right; position: relative; padding-right: 30px;" action="/management/deletelocation" method="post">
+<div class="deleteContainer">
+<form class="deleteButton" action="/management/deletelocation" method="post">
 	<input type="hidden" name="id" value="<%= results.id %>">
 	<button type="submit" class="btn btn-primary">Delete</button>
 </form>
+</div>
 </div>

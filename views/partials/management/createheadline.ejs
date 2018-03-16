@@ -1,0 +1,27 @@
+<link rel="stylesheet" type="text/css" href="/styles/createform.css" />
+<div>
+	<div>
+		<form class="creationForm" action="/management/createheadline" method="post">
+			<div class="form-group row">
+				<label for="title" class="col-2 col-form-label">Title</label>
+				<div class="col-10 longTextInput">
+					<input type="text" class="form-control" id="title" name="title" placeholder="Title">
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label for="thumburl" class="col-2 col-form-label">Thumbnail</label>
+				<div class="col-10 longTextInput">
+					<input type="text" class="form-control" id="thumburl" name="thumbnailurl" placeholder="Thumbnail Url">
+				</div>
+			</div>
+			
+			<div class="form-group row">
+			  <label for="body">Body</label>
+			  <textarea class="form-control" rows="5" id="body" name="body"></textarea>
+			</div>
+			
+			<button type="submit" class="btn btn-primary row">Create Headline</button>
+		</form>
+	</div>
+</div>

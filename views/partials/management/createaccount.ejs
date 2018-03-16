@@ -1,20 +1,21 @@
+<link rel="stylesheet" type="text/css" href="/styles/createform.css" />
 <div>
-<form style="padding-left: 40px; width: 300px;" action="/management/createuser" method="post">
+<form class="creationForm" action="/management/createuser" method="post">
   <div class="form-group row">
     <label for="inputEmail" class="col-2 col-form-label">Email address</label>
-	<div class="col-10">
+	<div class="col-10 nameInput">
 		<input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
 	</div>
   </div>
   <div class="form-group row">
     <label for="inputPassword" class="col-2 col-form-label">Password</label>
-	<div class="col-10">
+	<div class="col-10 nameInput">
 		<input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
 	  </div>
 	</div>
   <div class="form-group row">
     <label for="inputPasswordCheck" class="col-2 col-form-label">Password</label>
-	<div class="col-10">
+	<div class="col-10 nameInput">
 		<input type="password" class="form-control" id="inputPasswordConfirmation" placeholder="Password Confirmation" oninput="check(this)">
 		<script language='javascript' type='text/javascript'>
 			function check(input) {
@@ -30,13 +31,13 @@
   </div>
   <div class="form-group row">
     <label for="inputFirstName" class="col-2 col-form-label">First Name</label>
-	<div class="col-10">
+	<div class="col-10 nameInput">
 		<input type="text" class="form-control" id="inputFirstName"  name="firstname" placeholder="First Name">
 	</div>
   </div>
   <div class="form-group row">
     <label for="inputLastName" class="col-2 col-form-label">Last Name</label>
-	<div class="col-10">
+	<div class="col-10 nameInput">
 		<input type="text" class="form-control" id="inputLastName"  name="lastname" placeholder="Last Name">
 	</div>
   </div>

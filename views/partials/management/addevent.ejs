@@ -1,11 +1,12 @@
+<link rel="stylesheet" type="text/css" href="/styles/createform.css" />
 <div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-<form style="padding-left: 40px; width: 500px;" action="/management/createevent" method="post">
+<form class="creationForm" action="/management/createevent" method="post">
   <div class="form-group row">
     <label for="inputName" class="col-2 col-form-label">Event Name</label>
-	<div class="col-10" style="width: 200px;">
+	<div class="col-10 nameInput">
 		<input type="text" class="form-control" id="inputName" name="eventname" placeholder="Event Name">
 	</div>
   </div>

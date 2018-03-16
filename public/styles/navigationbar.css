@@ -1,0 +1,16 @@
+.barDetail {
+	margin-bottom: 0!important;
+}
+
+.barLogo {
+	width: 32px; 
+	height: 40px; 
+	margin-top: 5px; 
+	margin-left: 10px; 
+	display: inline; 
+	float: left;
+}
+
+.barPad {
+	padding-left:20px;
+}

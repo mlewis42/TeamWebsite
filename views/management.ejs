@@ -3,91 +3,90 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/styles/common.css" />
 <title>Chesapeake Angels</title>
 </head>
-<body style="background-color: #FF2222; border-color: #CC1111">
-<div>
+<body class="mainBackground">
 	<div>
-		<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px; margin-bottom: 0!important;">
-			  <% include ./partials/navigationBar %>
-		</nav>
-		<% include ./partials/seasonbanner %>
-	</div>
-</div>
-<div style="display: inline-block;">
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-			  <div class="navbar-brand">Team Management</div>
-			</div>
-			<ul class="nav navbar-nav">	
-			  <% if (current=="/management/addevent" || current=="/management/updateteamschedule") { %>
-					<li class="dropdown active">
-				<% } else { %>
-					<li class="dropdown">
-				<% } %>	
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Schedule
-				<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				  <li><a href="/management/addevent">Add Event</a></li>
-				  <li><a href="/management/updateteamschedule">Update Team Schedule</a></li>
-				  <li role="separator" class="divider"></li>
-				  <li><a href="/management/addeventlocation">Add Event Location</a></li>
-				  <li><a href="/management/editeventlocations">Edit Event Locations</a></li>
-				</ul>
-			  </li>
-			  <% if (current=="/management/createplayer" || current=="/management/viewplayers") { %>
-					<li class="dropdown active">
-				<% } else { %>
-					<li class="dropdown">
-				<% } %>	
-				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Team<span class="caret"></span></a>
-				  <ul class="dropdown-menu">            
-					<li><a href="/management/createplayer">Create Player</a></li>
-					<li><a href="/management/viewplayers">View Players</a></li>
-					<li role="separator" class="divider"></li>
-					<li><a href="/management/viewplayerrestore">Restore Deleted Player</a></li>
-				  </ul>
-				</li>
-				<% if (current=="/management/createaccount" || current=="/management/viewaccounts" || current=="/management/viewaccountsrestore") { %>
-					<li class="dropdown active">
-				<% } else { %>
-					<li class="dropdown">
-				<% } %>	
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accounts
-				<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				  <li><a href="/management/createaccount">Create Account</a></li>
-				  <li><a href="/management/viewaccounts">View Accounts</a></li>
-				  <li role="separator" class="divider"></li>
-				  <li><a href="/management/viewaccountsrestore">Restore Deleted Account</a></li>
-				</ul>
-			  </li>
-			  <% if (current=="/management/createseason" || current=="/management/updateseasons") { %>
-					<li class="dropdown active">
-				<% } else { %>
-					<li class="dropdown">
-				<% } %>	
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">News Feed
-				<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				  <li><a href="/management/addheadline">Add Headline</a></li>
-				  <li><a href="/management/editheadlines">Edit Headlines</a></li>
-				  <li role="separator" class="divider"></li>
-				  <li><a href="/management/createseason">Create Season</a></li>
-				  <li><a href="/management/editseasons">Edit Seasons</a></li>
-				</ul>
-			  </li>
-			</ul>
+		<div>
+			<% include ./partials/navigationBar %>		
+			<% include ./partials/seasonbanner %>
 		</div>
-	</nav> 
-</div>
+	</div>
+	<div style="display: inline-block;">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+				  <div class="navbar-brand">Team Management</div>
+				</div>
+				<ul class="nav navbar-nav">	
+				  <% if (current=="/management/addevent" || current=="/management/updateteamschedule" || current=="/management/addeventlocation" || current=="/management/editeventlocations") { %>
+						<li class="dropdown active">
+					<% } else { %>
+						<li class="dropdown">
+					<% } %>	
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Schedule
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					  <li><a href="/management/addevent">Add Event</a></li>
+					  <li><a href="/management/updateteamschedule">Update Team Schedule</a></li>
+					  <li role="separator" class="divider"></li>
+					  <li><a href="/management/addeventlocation">Add Event Location</a></li>
+					  <li><a href="/management/editeventlocations">Edit Event Locations</a></li>
+					</ul>
+				  </li>
+				  <% if (current=="/management/createplayer" || current=="/management/viewplayers") { %>
+						<li class="dropdown active">
+					<% } else { %>
+						<li class="dropdown">
+					<% } %>	
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Team<span class="caret"></span></a>
+					  <ul class="dropdown-menu">            
+						<li><a href="/management/createplayer">Create Player</a></li>
+						<li><a href="/management/viewplayers">View Players</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="/management/viewplayerrestore">Restore Deleted Player</a></li>
+					  </ul>
+					</li>
+					<% if (current=="/management/createaccount" || current=="/management/viewaccounts" || current=="/management/viewaccountsrestore") { %>
+						<li class="dropdown active">
+					<% } else { %>
+						<li class="dropdown">
+					<% } %>	
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accounts
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					  <li><a href="/management/createaccount">Create Account</a></li>
+					  <li><a href="/management/viewaccounts">View Accounts</a></li>
+					  <li role="separator" class="divider"></li>
+					  <li><a href="/management/viewaccountsrestore">Restore Deleted Account</a></li>
+					</ul>
+				  </li>
+				  <% if (current=="/management/createseason" || current=="/management/editseasons" || current=="/management/createheadline" || current=="/management/editheadlines") { %>
+						<li class="dropdown active">
+					<% } else { %>
+						<li class="dropdown">
+					<% } %>	
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">News Feed
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					  <li><a href="/management/createheadline">Add Headline</a></li>
+					  <li><a href="/management/editheadlines">Edit Headlines</a></li>
+					  <li role="separator" class="divider"></li>
+					  <li><a href="/management/createseason">Create Season</a></li>
+					  <li><a href="/management/editseasons">Edit Seasons</a></li>
+					</ul>
+				  </li>
+				</ul>
+			</div>
+		</nav> 
+	</div>
 <div>
    <% if (message && message != "") { %>
      <% include ./partials/messageDisplay %>
 	<% } %>
 </div>
-  <div class="jumbotron">
+  <div class="jumbotron jumbotrondetail">
   <% if (filler != null && filler.partials != null && filler.partials.mainform !=null) { %>
 	<%- include(filler.partials.mainform) %>
   <% } %>

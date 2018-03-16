@@ -1,0 +1,19 @@
+.creationForm {
+	padding-left: 40px; 
+	padding-right: 40px; 
+	width: 100%;
+}
+
+.smallCreationForm {
+	padding-left: 40px; 
+	padding-right: 40px; 
+	width: 500px;
+}
+
+.nameInput {
+	width: 200px;
+}
+
+.longTextInput {
+	width: 500px;
+}

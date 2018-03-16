@@ -1,7 +1,4 @@
 <div>
-	<title>
-		<?= results.seasontitle ?>
-	</title>
 	<div>
 	<script type="text/javascript" src="/scripts/TableWizard.js"></script>
 	<table class="table table-striped" id="sortableTable">
@@ -9,7 +6,7 @@
 		<tr>
 		  <th scope="col"></th>
 		  <th scope="col">Type</th>
-		  <th scope="col">Date</th>
+		  <th scope="col" style="cursor: pointer;" onclick="sortTableDate(2)">Date</th>
 		  <th scope="col">Location</th>
 		</tr>
 	  </thead>

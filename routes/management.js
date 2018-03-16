@@ -524,4 +524,74 @@ module.exports = function(app)
 			}
 		});	
 	});
+	
+	//***NEWS****///
+	
+	app.get('/management/createheadline', globals.RequireAdmin, function(req, res) {
+		res.render('../views/management', globals.PropertyList(req));  
+	});
+	
+	app.post('/management/createheadline', globals.RequireAdmin, (req, res) => {
+			var newNews = mongoose.model('NewsItem')({
+				title : req.body.title,
+				timestamp : new Date(),
+				body: req.body.body,
+				thumbnailurl : req.body.thumbnailurl
+			});
+			req.route.path = '/management/createheadline';
+			newNews.save(function(err) {
+				if(err)
+				{
+					res.render('management', globals.PropertyList(req, err));
+					
+				}else{
+					res.redirect('/management/editheadlines');
+				}
+			});
+	});
+	
+	app.get('/management/editheadlines', globals.RequireAdmin, function(req, res) {
+		
+		mongoose.model('NewsItem').find({datedeleted : null}, null, {sort: {'timestamp': 1}}, function(err, newsitems) {
+			var newsMap = [];
+			newsitems.forEach(function(news) {
+			  newsMap.push({
+					id: news._id,
+					title: news.title,
+					timestamp: globals.FormatDate(news.timestamp)
+			  });
+			});
+			res.render('management', globals.PropertyList(req, err, newsMap)); 
+		  });
+		 
+	});
+	
+	app.get('/management/editheadline', globals.RequireAdmin, function(req, res) {
+		mongoose.model('NewsItem').findOne({ _id: req.query.id, datedeleted: null }, function(err, news) {
+				res.render('management', globals.PropertyList(req, err, news));  
+			});    
+	});
+		
+	app.post('/management/editheadline', globals.RequireAdmin, (req, res) => {
+		mongoose.model('NewsItem').update({ _id: req.body.id }, {title: req.body.title, body: req.body.body, thumbnailurl: req.body.thumbnailurl}, function(err, raw){
+			if (err) {
+			  res.render('management', globals.PropertyList(req));
+			}
+			else{
+				res.redirect('/management/editheadlines');
+			}
+		});	
+	});
+	
+	app.post('/management/deleteheadline', globals.RequireAdmin, (req, res) => {
+		var datetime = new Date();
+		mongoose.model('NewsItem').update({ _id: req.body.id }, {datedeleted: datetime}, function(err, raw){
+			if (err) {
+			  res.render('management', globals.PropertyList(req));
+			}
+			else{
+				res.redirect('/management/editheadlines');
+			}
+		});	
+	});
 }

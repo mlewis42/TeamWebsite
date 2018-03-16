@@ -1,0 +1,13 @@
+.jumbotrondetail {
+	border-top-style: solid; 
+	border-bottom-style: solid;
+}
+
+.mainBackground {
+	background-color: #1F2233; 
+	border-color: #CC1111;
+}
+
+.loginForm {
+	padding-left: 30%;
+}

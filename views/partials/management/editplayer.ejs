@@ -1,16 +1,17 @@
-<div style="display: inline;">
-<div style="display: inline-block; vertical-align: top">
-<form style="padding-left: 40px; width: 300px;" action="/management/editplayer" method="post">
+<link rel="stylesheet" type="text/css" href="/styles/editform.css" />
+<div>
+<div class="editFormContainer">
+<form class="editForm" action="/management/editplayer" method="post">
 	<input type="hidden" name="id" value="<%= results.id %>">
   <div class="form-group row">
     <label for="inputFirstName" class="col-2 col-form-label">First Name</label>
-	<div class="col-10">
+	<div class="col-10 editInput">
 		<input type="text" class="form-control" id="inputFirstName"  name="firstname" placeholder="First Name" value="<%= results.firstname %>">
 	</div>
   </div>
   <div class="form-group row">
     <label for="inputLastName" class="col-2 col-form-label">Last Name</label>
-	<div class="col-10">
+	<div class="col-10 editInput">
 		<input type="text" class="form-control" id="inputLastName"  name="lastname" placeholder="Last Name" value="<%= results.lastname %>">
 	</div>
   </div>
@@ -44,8 +45,8 @@
    <button type="submit" class="btn btn-primary">Save</button>
 </form>
 </div>
-<div style="display: inline-block; vertical-align: top; float: right;">
-<form style="float: right; padding-right: 30px; vertical-align: top" action="/management/deleteplayer" method="post">
+<div class="deleteContainer">
+<form class="deleteButton" action="/management/deleteplayer" method="post">
 	<input type="hidden" name="id" value="<%= results.id %>">
 	<button type="submit" class="btn btn-primary">Delete</button>
 </form>

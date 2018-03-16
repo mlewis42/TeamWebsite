@@ -47,9 +47,10 @@ var newsItemSchema = new Schema({
         title : String,
 		body : String,
 		datedeleted : Date,
-		timestamp : Date
+		timestamp : Date,
+		thumbnailurl : String
     });
-var NewsItem = mongoose.model('NewsItem', seasonSchema);
+var NewsItem = mongoose.model('NewsItem', newsItemSchema);
 
 var eventSchema = new Schema({
         name : String,

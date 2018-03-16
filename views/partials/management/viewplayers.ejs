@@ -1,6 +1,7 @@
 <div>
 <script type="text/javascript" src="/scripts/TableWizard.js"></script>
-<div style="padding-left: 30px; padding-bottom: 10px;">
+<link rel="stylesheet" type="text/css" href="/styles/viewlist.css" />
+<div class="listContainer">
 <% if(!filler.showinactive) { %>
 <a class="btn btn-primary" role="button" href=<%= typeof filler.sortBy!='undefined' ? '/management/viewplayers?showinactive=true?' + filler.sortBy : '/management/viewplayers?showinactive=true' %> >Show Inactive Players</a>
 <% } else { %>

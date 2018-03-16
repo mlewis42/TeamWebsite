@@ -1,0 +1,31 @@
+.editFormContainer {
+	display: inline-block; 
+	vertical-align: top;
+}
+
+.editForm {
+	padding-left: 40px; 
+	width: 500px; 
+	position: relative;
+}
+
+.editInput {
+	width: 200px; 
+}
+
+.editInputLarge {
+	width: 500px;
+}
+
+.deleteContainer {
+	display: inline-block; 
+	vertical-align: top; 
+	float: right; 
+	width: 100px;
+}
+
+.deleteButton {
+	float: right; 
+	position: relative; 
+	padding-right: 30px;
+}

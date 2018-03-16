@@ -1,5 +1,6 @@
 var https = require('https');
 const express = require('express')
+const path = require('path');
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 var pem = require('pem')
@@ -10,7 +11,7 @@ var config = require('./config.json');
 const request = require('request');
 const apiKey = 'cf9483365f750d9168b985dfcc106db5';
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname + '/public')));
 app.set('view engine', 'ejs')
 
 const bodyParser = require('body-parser');
@@ -100,8 +101,41 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function (req, res) {
-  res.render('index', globals.PropertyList(req, ''));
-})
+	
+	//load headlines		
+	mongoose.model('NewsItem').find({datedeleted: null}, null, {sort: { 'timestamp' : -1 }, limit: 10}, function(err, news) {
+		var newsMap = [];
+
+		news.forEach(function(nItem) {
+		  newsMap.push({
+				id: nItem._id,
+				title: nItem.title,
+				body: nItem.body,
+				timestamp: globals.FormatDate(nItem.timestamp),
+				thumbnailurl : nItem.thumbnailurl
+		  });
+		});
+		
+		res.render('index', globals.PropertyList(req, err, newsMap));
+	  });
+	
+  
+});
+
+app.get('/headline', function(req, res) {
+		
+	mongoose.model('NewsItem').findOne({ _id: req.query.id }, function(err, news) {
+			globals.FormatDate(news.timestamp);
+			var newsMap = {
+				id: news._id,
+				title: news.title,
+				body: news.body,
+				thumbnailurl : news.thumbnailurl,
+				timestamp: globals.FormatDate(news.timestamp)
+			};
+			res.render('headline', globals.PropertyList(req, err, newsMap));  
+		});    
+});
 
 app.post('/login', function(req, res) {	
 	if(req.body.email && req.body.email != "" && req.body.password && req.body.password != ""){
