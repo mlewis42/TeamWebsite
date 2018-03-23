@@ -6,7 +6,7 @@
       <th scope="col">Number</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
-      <th scope="col">Position</th>
+      <th scope="col">Positions</th>
 	  <th scope="col"></th>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
 			<td><%= results[i].number %></td>
 			<td><%= results[i].firstname %></td>
 			<td><%= results[i].lastname %></td>
-			<td><%= results[i].position %></td>
+			<td><%= results[i].positions %></td>
 			<td scope="row">
 				<form style="padding-left: 40px; width: 300px;" action="/management/restoreplayer" method="post">
 					<input type="hidden" name="id" value="<%= results[i].id %>">

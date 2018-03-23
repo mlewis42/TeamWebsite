@@ -20,7 +20,7 @@ module.exports = function(app)
 					number: player.number,
 					firstname: player.firstname,
 					lastname: player.lastname,
-					position: player.position
+					positions: player.positions
 			  });
 			});
 			res.render('team', globals.PropertyList(req, err, playerMap, filler)); 

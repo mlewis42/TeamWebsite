@@ -21,6 +21,7 @@ var playerSchema = new Schema({
 		active :	Boolean,
 		number : String,
 		position : String,
+		positions : [],
 		datedeleted : Date
     });
 var Player = mongoose.model('Player', playerSchema);

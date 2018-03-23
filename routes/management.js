@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 var globals = require("../globalFunctions");
 var formidable = require('formidable');
-var fs = require('fs');
 var config = require('../config.json');
 
 module.exports = function(app)
@@ -165,16 +164,18 @@ module.exports = function(app)
 		if(req.body.number == "0")
 			req.body.number = "00";
 		
-		var newUser = mongoose.model('Player')({
+		console.log(req.body);
+		
+		var newPlayer = mongoose.model('Player')({
 			firstname : req.body.firstname,
 			lastname : req.body.lastname,
 			active : (req.body.active === "true"),
 			number : req.body.number,
-			position : req.body.position
+			positions : req.body.positions
 		});
 		
 		req.route.path = '/management/createplayer';
-		newUser.save(function(err) {
+		newPlayer.save(function(err) {
 			if(err)
 			{
 				if(err.code == 11000){
@@ -211,7 +212,7 @@ module.exports = function(app)
 					number: player.number,
 					firstname: player.firstname,
 					lastname: player.lastname,
-					position: player.position,
+					positions: player.positions,
 					active: player.active
 			  });
 			});
@@ -221,7 +222,6 @@ module.exports = function(app)
 	});
 	
 	app.get('/management/editplayer', globals.RequireAdmin, function(req, res) {
-		
 		mongoose.model('Player').findOne({ _id: req.query.id }, function(err, player) {
 				res.render('management', globals.PropertyList(req, err, player));  
 			});    
@@ -232,7 +232,7 @@ module.exports = function(app)
 		if(req.body.number == "0")
 			req.body.number = "00";
 		
-		mongoose.model('Player').update({ _id: req.body.id }, {firstname: req.body.firstname, lastname: req.body.lastname, number: req.body.number, position: req.body.position, active: req.body.active === "true"}, function(err, raw){
+		mongoose.model('Player').update({ _id: req.body.id }, {firstname: req.body.firstname, lastname: req.body.lastname, number: req.body.number, positions: req.body.positions, active: req.body.active === "true"}, function(err, raw){
 			if (err) {
 			  res.render('management', globals.PropertyList(req));
 			}
@@ -251,7 +251,7 @@ module.exports = function(app)
 					number: player.number,
 					firstname: player.firstname,
 					lastname: player.lastname,
-					position: player.position
+					positions: player.positions
 			  });
 			});
 			res.render('management', globals.PropertyList(req, err, playerMap)); 

@@ -15,7 +15,7 @@
 	  <th scope="col" style="cursor: pointer;" onclick="sortTableNumeric(1)">Number</th>
       <th scope="col" style="cursor: pointer;" onclick="sortTableAlpha(2)">First</th>
       <th scope="col" style="cursor: pointer;" onclick="sortTableAlpha(3)">Last</th>
-      <th scope="col" style="cursor: pointer;" onclick="sortTablePosition(4)">Position</th>
+      <th scope="col">Positions</th>
 	  <th scope="col" style="cursor: pointer;" onclick="sortTableAlpha(5)">Active</th>
     </tr>
   </thead>
@@ -27,7 +27,7 @@
 			<td><%= results[i].number %></td>
 			<td><%= results[i].firstname %></td>
 			<td><%= results[i].lastname %></td>
-			<td><%= results[i].position %></td>
+			<td><%= results[i].positions %></td>
 			<td><%= results[i].active %></td>		
 		 </tr>
 	<% } %>
