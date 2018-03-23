@@ -1,0 +1,23 @@
+<% if(filler && filler.sponsers && filler.sponsers.length > 0) { %>
+<div class="sponserBanner">
+
+	<div style=" font-size: 20px; text-align: center; text-decoration: underline;">
+		SPONSERS
+	</div>
+	
+	<div class="sponserSpace">
+		<% for(var i=0; i<filler.sponsers.length; i++) { %>
+			<% if(filler.sponsers[i].imagename != null && filler.sponsers[i].imagename != "") { %>
+				<% if(filler.sponsers[i].websiteurl != null && filler.sponsers[i].websiteurl != "") { %>
+				<a href=<%= filler.sponsers[i].websiteurl %>>
+				<img src=<%= "/images/sponsers/" + filler.sponsers[i].imagename %> class="sponserBlock" />
+				</a>
+				<% } else { %>
+				<img src=<%= "/images/sponsers/" + filler.sponsers[i].imagename %> class="sponserBlock" />
+				<% } %>
+			<% } %>
+		<% } %>
+	</div>
+	
+</div>
+<% } %>

@@ -1,5 +1,8 @@
 var mongoose = require("mongoose");
 var globals = require("../globalFunctions");
+var formidable = require('formidable');
+var fs = require('fs');
+var config = require('../config.json');
 
 module.exports = function(app)
 {
@@ -536,7 +539,8 @@ module.exports = function(app)
 				title : req.body.title,
 				timestamp : new Date(),
 				body: req.body.body,
-				thumbnailurl : req.body.thumbnailurl
+				thumbnailurl : req.body.thumbnailurl,
+				articleimageurl : req.body.articleimageurl
 			});
 			req.route.path = '/management/createheadline';
 			newNews.save(function(err) {
@@ -573,7 +577,7 @@ module.exports = function(app)
 	});
 		
 	app.post('/management/editheadline', globals.RequireAdmin, (req, res) => {
-		mongoose.model('NewsItem').update({ _id: req.body.id }, {title: req.body.title, body: req.body.body, thumbnailurl: req.body.thumbnailurl}, function(err, raw){
+		mongoose.model('NewsItem').update({ _id: req.body.id }, {title: req.body.title, body: req.body.body, thumbnailurl: req.body.thumbnailurl, articleimageurl: req.body.articleimageurl}, function(err, raw){
 			if (err) {
 			  res.render('management', globals.PropertyList(req));
 			}
@@ -591,6 +595,117 @@ module.exports = function(app)
 			}
 			else{
 				res.redirect('/management/editheadlines');
+			}
+		});	
+	});
+	
+	//***SPONSER****///
+	
+	app.get('/management/createsponser', globals.RequireAdmin, function(req, res) {
+		res.render('../views/management', globals.PropertyList(req));  
+	});
+	
+	app.post('/management/createsponser', globals.RequireAdmin, (req, res) => {
+		
+		var form = new formidable.IncomingForm();		
+		
+		form.parse(req, function(err, fields, files) {
+				if (err)
+					res.redirect('/management');
+							
+				var fileName = "";
+				
+				if(files != null && files.upload != null)
+					fileName = files.upload.name;
+				
+				var sponser = mongoose.model('Sponser')({
+					name : fields.name,
+					imagename : fileName,
+					websiteurl : fields.websiteurl,
+					order :  0
+				});
+				req.route.path = '/management/createsponser';
+				sponser.save(function(err) {
+					if(err)
+					{
+						res.render('management', globals.PropertyList(req, err));
+						
+					}else{
+						res.redirect('/management/editsponsers');
+					}
+				});
+		});
+
+		form.on('fileBegin', function (name, file){
+			if(file.name != ""){
+				file.path = config.sponserImageDirectory + file.name;
+			}
+		});
+	});
+	
+	app.get('/management/editsponsers', globals.RequireAdmin, function(req, res) {
+		
+		mongoose.model('Sponser').find({datedeleted : null}, null, {sort: {'order': 1}}, function(err, sponsers) {
+			var sponserMap = [];
+			sponsers.forEach(function(sponser) {
+			  sponserMap.push({
+					id: sponser._id,
+					name: sponser.name,
+					order: sponser.order
+			  });
+			});
+			res.render('management', globals.PropertyList(req, err, sponserMap)); 
+		  });
+		 
+	});
+	
+	app.get('/management/editsponser', globals.RequireAdmin, function(req, res) {
+		mongoose.model('Sponser').findOne({ _id: req.query.id, datedeleted: null }, function(err, sponser) {
+				res.render('management', globals.PropertyList(req, err, sponser));  
+			});    
+	});
+		
+	app.post('/management/editsponser', globals.RequireAdmin, (req, res) => {		
+		
+		var form = new formidable.IncomingForm();		
+		
+		form.parse(req, function(err, fields, files) {
+			if (err)
+				res.redirect('/management');
+			
+			var updateQuery = {
+				name: fields.name, 
+				websiteurl: fields.websiteurl
+			};
+			
+			if(files != null && files.upload != null && files.upload.name != null && files.upload.name != "")
+				updateQuery.imagename = files.upload.name;
+	
+			mongoose.model('Sponser').update({ _id: fields.id }, updateQuery, function(err, raw){
+				if (err) {
+				  res.render('management', globals.PropertyList(req));
+				}
+				else{
+					res.redirect('/management/editsponsers');
+				}
+			});
+		});
+
+		form.on('fileBegin', function (name, file){
+			if(file.name != ""){
+				file.path = config.sponserImageDirectory + file.name;
+			}
+		});		
+	});
+	
+	app.post('/management/deletesponser', globals.RequireAdmin, (req, res) => {
+		var datetime = new Date();
+		mongoose.model('Sponser').update({ _id: req.body.id }, {datedeleted: datetime}, function(err, raw){
+			if (err) {
+			  res.render('management', globals.PropertyList(req));
+			}
+			else{
+				res.redirect('/management/editsponsers');
 			}
 		});	
 	});

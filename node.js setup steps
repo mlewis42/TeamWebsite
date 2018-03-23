@@ -1,15 +1,17 @@
 - Create directory for new website
 - cmd cd to directory
-- cmd "npm init"
-- cmd "npm install --save express"
-- cmd "npm install ejs --save"
-- npm install request
-- npm install touch-cli -g
+npm init
+npm install --save express
+npm install ejs --save
+npm install request
+npm install touch-cli -g
 npm install mongoose --save
-- npm install express-session
-- npm install cookie-parser
+npm install express-session
+npm install cookie-parser
+npm install body-parser
 npm install bcrypt
 npm install pem
+npm install formidable
 
 - npm install passport
 - npm install passport-local
@@ -17,3 +19,6 @@ npm install pem
 ///setting up mongodb
 install
 make directory c:/data/db
+
+mrdevadmin
+Twenty1Squared

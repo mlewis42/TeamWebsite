@@ -8,6 +8,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/styles/common.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/homepage.css" />
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script src="script.js"></script>
 	</head>
@@ -22,9 +23,16 @@
 				<% include ./partials/seasonbanner %>
 			</div>
 			<br/>
-			<div class="jumbotron jumbotrondetail"> <p>
+			<div class="jumbotron jumbotrondetail" style="display: block;">
+				<div class="sponserContainer">
+				<% include ./partials/sponserbanner %>
+				</div>
+				<div class="feedContainer">
+				<% include ./partials/gamechangerfeed %>
 				<% include ./partials/newsfeed %>
-			</p></div>
+				</div>
+				<div style="clear:both"></div>
+			</div>
 		</div>
 	</body>
 </html>

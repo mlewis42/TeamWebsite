@@ -1,21 +1,24 @@
-<div style="margin-left: 15px; margin-right: 15px;">
-<% if(results) { %>
-	<% for(var i=0; i<results.length; i++) { %>
-		<a href="/headline?id=<%= results[i].id %>">			 
-			<div style="display: inline-block; width: 300px; height: 300px; border-style: solid; position: relative; margin-right: 20px; border-color: #333333;">
-				<% if(results[i].thumbnailurl) { %>
-				<img src=<%= results[i].thumbnailurl %> style="height: 100%; width: 100%;"> 
-				<% } else { %>
-				<img src="/images/ca_logo.png" style="height: 100%; width: 100%;"/>
-				<% } %>
-				<div style="bottom: 0px; position: absolute; margin-left: 5px; font-size: 20px; text-shadow: 1px 1px red; font-weight: bold; color: black;">
-					<%= results[i].title %>
+<div class="newsFeed">
+	<div class="newTitle">
+		Angels News
+	</div>
+	<% if(results) { %>
+		<% for(var i=0; i<results.length; i++) { %>
+			<a href="/headline?id=<%= results[i].id %>">			 
+				<div style="display: inline-block; width: 300px; height: 300px; border-style: solid; position: relative; margin-right: 20px; margin-bottom: 20px; border-color: #333333;">
+					<% if(results[i].thumbnailurl) { %>
+					<img src=<%= results[i].thumbnailurl %> style="height: 100%; width: 100%;"> 
+					<% } else { %>
+					<img src="/images/ca_logo.png" style="height: 100%; width: 100%;"/>
+					<% } %>
+					<div style="bottom: 0px; position: absolute; margin-left: 5px; font-size: 20px; text-shadow: 1px 1px red; font-weight: bold; color: black;">
+						<%= results[i].title %>
+					</div>
+					<div style="color: black; position: absolute; right: 0px; bottom: -20px;">
+						<%= results[i].timestamp %>
+					</div>
 				</div>
-				<div style="color: black; position: absolute; right: 0px; bottom: -20px;">
-					<%= results[i].timestamp %>
-				</div>
-			</div>
-		</a>
+			</a>
+		<% } %>
 	<% } %>
-<% } %>
 </div>

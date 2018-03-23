@@ -1,0 +1,48 @@
+<link rel="stylesheet" type="text/css" href="/styles/editform.css" />
+<div>
+<div class="editFormContainer">
+<form class="editForm" action="/management/editsponser" enctype="multipart/form-data" method="post">
+  <div class="form-group row">
+	<input  type="hidden" name="id" value="<%= results.id %>">
+  </div>
+  <div class="form-group row">
+    <label for="name" class="col-2 col-form-label">Name</label>
+	<div class="col-10 editInput">
+		<input type="text" class="form-control" id="name"  name="name" placeholder="Sponser Name" value="<%= results.name %>">
+	</div>
+  </div>
+  <% if(results.imagename && results.imagename != "") { %>
+  <div class="form-group row">
+		<label for="currentimage" class="col-2 col-form-label">Current Image</label>
+		<div class="col-10" style="width: 500px;">
+			<img src="<%= "/images/sponsers/" + results.imagename %>"/>
+		</div>
+		<%= results.imagename %>
+  </div>
+  
+  <% } %>
+			
+	<div class="form-group row">
+		<label for="artcleimage" class="col-2 col-form-label">New Sponser Image</label>
+		<div class="col-10" style="width: 500px; height: 50px;">
+			<input type="file" name="upload" multiple="multiple">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<label for="thumburl" class="col-2 col-form-label">Website</label>
+		<div class="col-10 longTextInput">
+			<input type="text" class="form-control" id="thumburl" name="websiteurl" placeholder="Website Url" value="<%= results.websiteurl %>">
+		</div>
+	</div>
+	
+   <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+<div class="deleteContainer">
+<form class="deleteButton" action="/management/deletesponser" method="post">
+	<input type="hidden" name="id" value="<%= results.id %>">
+	<button type="submit" class="btn btn-primary">Delete</button>
+</form>
+</div>
+</div>

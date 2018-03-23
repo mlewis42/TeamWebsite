@@ -1,0 +1,5 @@
+{
+	"connectionString" : "mongodb://localhost:27017/baseball",
+	"port" : "3000",
+	"sponserImageDirectory" : "C:/Practice/BBTeamSite/public/images/sponsers/"
+}

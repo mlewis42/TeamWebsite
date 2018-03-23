@@ -11,11 +11,18 @@
 		<input type="text" class="form-control" id="title"  name="title" placeholder="Title" value="<%= results.title %>">
 	</div>
   </div>
-			
+	
 	<div class="form-group row">
-		<label for="thumburl" class="col-2 col-form-label">Thumbnail</label>
+		<label for="thumbnail" class="col-2 col-form-label">Thumbnail (100px x 100px)</label>
 		<div class="col-10 editInputLarge">
 			<input type="text" class="form-control" id="thumburl" name="thumbnailurl" placeholder="Thumbnail Url" value="<%= results.thumbnailurl %>">
+		</div>
+	</div>
+			
+	<div class="form-group row">
+		<label for="artcleimage" class="col-2 col-form-label">Article Image</label>
+		<div class="col-10 editInputLarge">
+			<input type="text" class="form-control" id="artcleimage" name="articleimageurl" placeholder="Article Image Url" value="<%= results.articleimageurl %>">
 		</div>
 	</div>
   

@@ -48,9 +48,19 @@ var newsItemSchema = new Schema({
 		body : String,
 		datedeleted : Date,
 		timestamp : Date,
-		thumbnailurl : String
+		thumbnailurl : String,
+		articleimageurl: String
     });
 var NewsItem = mongoose.model('NewsItem', newsItemSchema);
+
+var sponserSchema = new Schema({
+        name : String,
+		websiteurl : String,
+		imagename: String,
+		order: Number,
+		datedeleted : Date
+    });
+var Sponser = mongoose.model('Sponser', sponserSchema);
 
 var eventSchema = new Schema({
         name : String,
