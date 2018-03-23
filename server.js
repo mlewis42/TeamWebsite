@@ -41,9 +41,6 @@ app.use(session({
     saveUninitialized: true
 }))
 
-var favicon = require('serve-favicon');
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
-
 //middleware that checks and validates every user request
 app.use(function(req, res, next) {
   if (req.session && req.session.user) {
