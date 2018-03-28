@@ -91,9 +91,8 @@ app.use(function(req, res, next) {
 				if(event.type == "Scrimmage"){
 					seasonbanner.nextgamename += " (scrimmage)";
 				}
-				
-				req.session.seasonbanner = seasonbanner;
 			}
+			req.session.seasonbanner = seasonbanner;
 			next();
 		});
 	});

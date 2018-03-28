@@ -41,4 +41,10 @@
 	
    <button type="submit" class="btn btn-primary">Save</button>
 </form>
+<div class="deleteContainer">
+<form class="deleteButton" action="/management/deleteevent" method="post">
+	<input type="hidden" name="id" value="<%= results.id %>">
+	<button type="submit" class="btn btn-primary">Delete</button>
+</form>
+</div>
 </div>

@@ -67,6 +67,7 @@ var eventSchema = new Schema({
         name : String,
         eventdate : Date,
 		cancelled :	Boolean,
+		datedeleted : Date,
 		type : String,
 		location : {
 						name : String,

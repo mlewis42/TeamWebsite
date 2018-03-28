@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var globals = require("../globalFunctions");
+var tableMapper = require("../tableMapper");
 
 module.exports = function(app)
 {
@@ -15,7 +16,7 @@ module.exports = function(app)
 		if (!req.session.user) {
 			//not logged in, display basic team game and scrimmage schedule
 			
-			mongoose.model('Event').find({eventdate: {$gte: currdate}, type: {$in: ['Game', 'Scrimmage']} }, null, {sort: {'eventdate': 1}}, function(err, events) {
+			mongoose.model('Event').find({eventdate: {$gte: currdate}, type: {$in: ['Game', 'Scrimmage']}, datedeleted: null }, null, {sort: {'eventdate': 1}}, function(err, events) {
 				if(events != null)
 				{
 					var eventMap = [];
@@ -24,16 +25,17 @@ module.exports = function(app)
 					  eventMap.push({
 							id: event._id,
 							name: event.name,
-							eventdate: globals.FormatDate(event.eventdate),
+							eventdate: !event.cancelled ? globals.FormatDate(event.eventdate) : 'CANCELLED',
 							type: event.type,
-							location: event.location,
+							locationname: event.location ? event.location.name : '',
 							cancelled: event.cancelled
 					  });
 					});
-					
-					results.events = eventMap;
+					var filler = {};
+					filler.tableMap = tableMapper.ScheduleTable();
+					results = eventMap;
 					req.route.path = '/schedule/viewcalendar';
-					res.render('schedule', globals.PropertyList(req, "", results));
+					res.render('schedule', globals.PropertyList(req, "", results, filler));
 				}
 			});
 				
@@ -41,23 +43,25 @@ module.exports = function(app)
 		} else {
 			//logged in, display all events and schedule interaction
 			
-			mongoose.model('Event').find({eventdate: {$gte: currdate}}, null, {sort: {'eventdate': 1}}, function(err, events) {
+			mongoose.model('Event').find({eventdate: {$gte: currdate}, datedeleted: null }, null, {sort: {'eventdate': 1}}, function(err, events) {
 				var eventMap = [];
 
 				events.forEach(function(event) {
 				  eventMap.push({
 						id: event._id,
 						name: event.name,
-						eventdate: globals.FormatDate(event.eventdate),
+						eventdate: !event.cancelled ? globals.FormatDate(event.eventdate) : 'CANCELLED',
 						type: event.type,
-						location: event.location,
+						locationname: event.location ? event.location.name : '',
+						readhref: '/schedule/viewevent?id=' + event._id,
 						cancelled: event.cancelled
 				  });
 				});
-				
-				results.events = eventMap;
-				req.route.path = '/schedule/viewusercalendar';
-				res.render('schedule', globals.PropertyList(req, "", results));
+				var filler = {};
+				filler.tableMap = tableMapper.ScheduleUserTable();
+				results = eventMap;
+				req.route.path = '/schedule/viewcalendar';
+				res.render('schedule', globals.PropertyList(req, "", results, filler));
 			  });
 		}
 	});

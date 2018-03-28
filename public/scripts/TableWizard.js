@@ -8,6 +8,10 @@ function unlockDelete(obj) {
   }
 };
 
+function rowClick(link){
+	window.location.replace(link);
+};
+
 function sortTableAlpha(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("sortableTable");

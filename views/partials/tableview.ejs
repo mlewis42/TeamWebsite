@@ -1,0 +1,43 @@
+<div>
+	<script type="text/javascript" src="/scripts/TableWizard.js"></script>
+	<link rel="stylesheet" type="text/css" href="/styles/viewlist.css" />
+	<div class="listContainer">
+	
+		<table class="table table-striped <%= (filler.tableMap != null && filler.tableMap.rowClickProperty != null && filler.tableMap.rowClickProperty != '') ? 'hoverTable' : '' %>" id="sortableTable">
+		  <thead>
+			<tr class="tableHeader">
+				<% if(filler.tableMap){ %>
+					<% for(var i=0; i<filler.tableMap.columnMap.length; i++) { %>
+						<th scope="col" 
+							<% if(filler.tableMap.columnMap[i].length > 2 && filler.tableMap.columnMap[i][2] != '') { %>
+								style="cursor: pointer;"
+								onclick="<%= filler.tableMap.columnMap[i][2] %>(<%= i %>)"
+							<% } %>>
+							<%= filler.tableMap.columnMap[i][0] %>
+						</th>
+					<% } %>
+				<% } %>
+			</tr>
+		  </thead>
+		  <tbody>
+			<% if(results){ %>
+				<% for(var i=0; i<results.length; i++) { %>
+					<% if(filler.tableMap.rowClickProperty != null && filler.tableMap.rowClickProperty != '') { %>
+					    <tr class="clickableTable" onclick="rowClick('<%= results[i][filler.tableMap.rowClickProperty] %>')">
+					<% } else { %>
+						<tr>
+					<% } %>
+						<% if(filler.tableMap){ %>
+							<% for(var k=0; k<filler.tableMap.columnMap.length; k++) { %>
+									<td>
+										<%= results[i][filler.tableMap.columnMap[k][1]] %>
+									</td>
+							<% } %>
+						<% } %>
+					 </tr>
+				<% } %>
+			<% } %>
+			</tbody>
+		</table>
+	</div>
+</div>

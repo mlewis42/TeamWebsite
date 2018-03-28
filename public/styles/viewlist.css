@@ -2,3 +2,16 @@
 	padding-left: 30px; 
 	padding-bottom: 10px;
 }
+
+.hoverTable tr:hover {
+	color: #5599DD;
+}
+
+.clickableTable {
+	cursor: pointer;
+}
+
+.hoverTable .tableHeader
+{
+	color: black !important;
+}

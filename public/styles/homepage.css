@@ -1,16 +1,17 @@
+.homeContainer
+{
+    display: flex;
+	align-items: stretch;
+}
 .sponserContainer
 {
 	display: inline-block;
-	position: relative;
 }
 
 .feedContainer
 {
-	margin-left: 20px;
-	width: 75%;
 	display: inline-block;
 	vertical-align: top;
-	position: relative;
 }
 
 .sponserBanner
@@ -20,7 +21,7 @@
 	padding: 15px; 
 	margin-left: 10px;
 	position: relative;
-	max-width: 250px;
+	max-width: 300px;
 }
 
 .sponserSpace
@@ -51,7 +52,7 @@
 	position: relative;	
 }
 
-.newTitle{
+.newsTitle{
 	font-size: 30px;
 	border-top-style: inset;
 	border-bottom-style: inset;

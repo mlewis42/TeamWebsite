@@ -1,11 +1,12 @@
 var mongoose = require("mongoose");
 var globals = require("../globalFunctions");
+var tableMapper = require("../tableMapper");
 
 module.exports = function(app)
 {
 	app.get('/team', function(req, res) {
 		
-		var filler = [];
+		var filler = {};
 		
 		var query = {};
 		query.datedeleted = null;
@@ -23,6 +24,8 @@ module.exports = function(app)
 					positions: player.positions
 			  });
 			});
+			
+			filler.tableMap = tableMapper.PlayerTable();
 			res.render('team', globals.PropertyList(req, err, playerMap, filler)); 
 		  });
 	});

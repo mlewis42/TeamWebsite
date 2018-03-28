@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var globals = require("../globalFunctions");
 var formidable = require('formidable');
 var config = require('../config.json');
+var tableMapper = require("../tableMapper");
 
 module.exports = function(app)
 {
@@ -106,11 +107,14 @@ module.exports = function(app)
 					email: user.email,
 					firstname: user.firstname,
 					lastname: user.lastname,
-					admin: user.admin
+					admin: user.admin,
+					readhref: '/management/editAccount?id=' + user._id
 			  });
 			});
-			
-			res.render('management', globals.PropertyList(req, err, userMap)); 
+			var filler = {};
+			filler.tableMap = tableMapper.AccountManagementTable();
+			req.route.path = '/management/managementtable';
+			res.render('management', globals.PropertyList(req, err, userMap, filler)); 
 		  });
 		 
 	});
@@ -192,7 +196,7 @@ module.exports = function(app)
 	
 	app.get('/management/viewplayers', globals.RequireAdmin, function(req, res) {
 		
-		var filler = [];
+		var filler = {};
 		
 		var query = {};
 		query.datedeleted = null;
@@ -213,9 +217,13 @@ module.exports = function(app)
 					firstname: player.firstname,
 					lastname: player.lastname,
 					positions: player.positions,
-					active: player.active
+					active: player.active,
+					readhref: '/management/editPlayer?id=' + player._id
 			  });
 			});
+			
+			filler.tableMap = tableMapper.PlayerManagementTable();
+			req.route.path = '/management/managementtable';
 			res.render('management', globals.PropertyList(req, err, playerMap, filler)); 
 		  });
 		 
@@ -299,20 +307,24 @@ module.exports = function(app)
 	app.get('/management/updateteamschedule', globals.RequireAdmin, function(req, res) {
 		
 		var currdate = new Date();
-		mongoose.model('Event').find({eventdate: {$gte: currdate}}, null, {sort: {'eventdate': 1}}, function(err, events) {
+		mongoose.model('Event').find({eventdate: {$gte: currdate}, datedeleted : null}, null, {sort: {'eventdate': 1}}, function(err, events) {
 			var eventMap = [];
 
 			events.forEach(function(event) {
 			  eventMap.push({
 					id: event._id,
 					name: event.name,
-					eventdate: globals.FormatDate(event.eventdate),
+					eventdate: !event.cancelled ? globals.FormatDate(event.eventdate) : 'CANCELLED',
 					type: event.type,
-					location : event.location,
+					locationname: event.location ? event.location.name : '',
+					readhref: '/management/editevent?id=' + event._id,
 					cancelled: event.cancelled
 			  });
 			});
-			res.render('management', globals.PropertyList(req, err, eventMap)); 
+			var filler = {};
+			filler.tableMap = tableMapper.ScheduleManagementTable();
+			req.route.path = '/management/managementtable';
+			res.render('management', globals.PropertyList(req, err, eventMap, filler)); 
 		  });
 		 
 	});
@@ -386,6 +398,18 @@ module.exports = function(app)
 			res.render('management', globals.PropertyList(req, 'Invalid date and time format.'));
 		}
 	});
+	
+	app.post('/management/deleteevent', globals.RequireAdmin, (req, res) => {
+		var datetime = new Date();
+		mongoose.model('Event').update({ _id: req.body.id }, {datedeleted: datetime}, function(err, raw){
+			if (err) {
+			  res.render('management', globals.PropertyList(req));
+			}
+			else{
+				res.redirect('/management/updateteamschedule');
+			}
+		});	
+	});
 
 	//***EVENT LOCATIONS****///
 	
@@ -420,10 +444,16 @@ module.exports = function(app)
 			  locationMap.push({
 					id: location._id,
 					name: location.name,
-					address: location.address
+					address: location.address,
+					readhref: '/management/editlocation?id=' + location._id,
 			  });
 			});
-			res.render('management', globals.PropertyList(req, err, locationMap)); 
+			
+			var filler = {};
+			filler.tableMap = tableMapper.LocationManagementTable();
+			req.route.path = '/management/managementtable';
+			
+			res.render('management', globals.PropertyList(req, err, locationMap, filler)); 
 		  });
 		 
 	});
@@ -491,10 +521,18 @@ module.exports = function(app)
 					id: season._id,
 					name: season.name,
 					standing: season.standing,
-					record: season.record
+					record: season.record,
+					wins: season.record.wins,
+					losses: season.record.losses,
+					readhref: '/management/editSeason?id=' + season._id
 			  });
 			});
-			res.render('management', globals.PropertyList(req, err, seasonMap)); 
+			
+			var filler = {};
+			filler.tableMap = tableMapper.SeasonManagementTable();
+			req.route.path = '/management/managementtable';
+			
+			res.render('management', globals.PropertyList(req, err, seasonMap, filler)); 
 		  });
 		 
 	});
@@ -562,10 +600,14 @@ module.exports = function(app)
 			  newsMap.push({
 					id: news._id,
 					title: news.title,
-					timestamp: globals.FormatDate(news.timestamp)
+					timestamp: globals.FormatDate(news.timestamp),
+					readhref: '/management/editHeadline?id=' + news._id
 			  });
 			});
-			res.render('management', globals.PropertyList(req, err, newsMap)); 
+			var filler = {};
+			filler.tableMap = tableMapper.HeadlineManagementTable();
+			req.route.path = '/management/managementtable';
+			res.render('management', globals.PropertyList(req, err, newsMap, filler)); 
 		  });
 		 
 	});
@@ -651,10 +693,14 @@ module.exports = function(app)
 			  sponserMap.push({
 					id: sponser._id,
 					name: sponser.name,
-					order: sponser.order
+					order: sponser.order,
+					readhref: '/management/editSponser?id=' + sponser._id
 			  });
 			});
-			res.render('management', globals.PropertyList(req, err, sponserMap)); 
+			var filler = {};
+			filler.tableMap = tableMapper.SponsorManagementTable();
+			req.route.path = '/management/managementtable';
+			res.render('management', globals.PropertyList(req, err, sponserMap, filler)); 
 		  });
 		 
 	});

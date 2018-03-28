@@ -24,15 +24,18 @@
 				<% include ./partials/seasonbanner %>
 			</div>
 			<br/>
-			<div class="jumbotron jumbotrondetail" style="display: block;">
-				<div class="sponserContainer">
-				<% include ./partials/sponserbanner %>
+			<div class="jumbotron jumbotrondetail">
+				<div class="homeContainer">
+					<div class="sponserContainer">
+					<% include ./partials/sponserbanner %>
+					
+					</div>
+					<div class="feedContainer">
+					<% include ./partials/gamechangerfeed %>
+					<% include ./partials/newsfeed %>
+					</div>
+					<div style="clear:both"></div>
 				</div>
-				<div class="feedContainer">
-				<% include ./partials/gamechangerfeed %>
-				<% include ./partials/newsfeed %>
-				</div>
-				<div style="clear:both"></div>
 			</div>
 		</div>
 	</body>
